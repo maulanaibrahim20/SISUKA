@@ -1,32 +1,68 @@
-<!-- Core JS -->
-<!-- bui{{ url('/assets') }}/vendor/js/core.js -->
-<script src="{{ url('/assets') }}/vendor/libs/jquery/jquery.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/popper/popper.js"></script>
-<script src="{{ url('/assets') }}/vendor/js/bootstrap.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/node-waves/node-waves.js"></script>
+<!-- JQUERY JS -->
+<script src="{{ url('/assets') }}/js/jquery.min.js"></script>
 
-<script src="{{ url('/assets') }}/vendor/libs/hammer/hammer.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/i18n/i18n.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/typeahead-js/typeahead.js"></script>
+<!-- BOOTSTRAP JS -->
+<script src="{{ url('/assets') }}/plugins/bootstrap/js/popper.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="{{ url('/assets') }}/vendor/js/menu.js"></script>
-<!-- endbuild -->
+<!-- SPARKLINE JS-->
+<script src="{{ url('/assets') }}/js/jquery.sparkline.min.js"></script>
 
-<!-- Vendors JS -->
-<script src="{{ url('/assets') }}/vendor/libs/apex-charts/apexcharts.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/swiper/swiper.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/toastr/toastr.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
-<script src="{{ url('/assets') }}/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
+<!-- CHART-CIRCLE JS-->
+<script src="{{ url('/assets') }}/js/circle-progress.min.js"></script>
 
-<!-- Main JS -->
-<script src="{{ url('/assets') }}/js/main.js"></script>
+<!-- CHARTJS CHART JS-->
+<script src="{{ url('/assets') }}/plugins/chart/Chart.bundle.js"></script>
+<script src="{{ url('/assets') }}/plugins/chart/utils.js"></script>
 
-<!-- Page JS -->
-<script src="{{ url('/assets') }}/js/dashboards-analytics.js"></script>
-<script src="{{ url('/assets') }}/js/ui-toasts.js"></script>
-<script src="{{ url('/assets') }}/js/tables-datatables-basic.js"></script>
-<script src="{{ url('/assets') }}/js/form-validation.js"></script>
+<!-- PIETY CHART JS-->
+<script src="{{ url('/assets') }}/plugins/peitychart/jquery.peity.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/peitychart/peitychart.init.js"></script>
+
+<!-- INTERNAL SELECT2 JS -->
+<script src="{{ url('/assets') }}/plugins/select2/select2.full.min.js"></script>
+
+<!-- INTERNAL Data tables js-->
+<script src="{{ url('/assets') }}/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+<script src="{{ url('/assets') }}/plugins/datatable/dataTables.responsive.min.js"></script>
+
+<!-- ECHART JS-->
+<script src="{{ url('/assets') }}/plugins/echarts/echarts.js"></script>
+
+<!-- SIDE-MENU JS-->
+<script src="{{ url('/assets') }}/plugins/sidemenu/sidemenu.js"></script>
+
+<!-- Sticky js -->
+<script src="{{ url('/assets') }}/js/sticky.js"></script>
+
+<!-- SIDEBAR JS -->
+<script src="{{ url('/assets') }}/plugins/sidebar/sidebar.js"></script>
+
+<!-- Perfect SCROLLBAR JS-->
+<script src="{{ url('/assets') }}/plugins/p-scroll/perfect-scrollbar.js"></script>
+<script src="{{ url('/assets') }}/plugins/p-scroll/pscroll.js"></script>
+<script src="{{ url('/assets') }}/plugins/p-scroll/pscroll-1.js"></script>
+
+<!-- APEXCHART JS -->
+<script src="{{ url('/assets') }}/js/apexcharts.js"></script>
+
+<!-- INDEX JS -->
+<script src="{{ url('/assets') }}/js/index1.js"></script>
+
+<!-- Color Theme js -->
+<script src="{{ url('/assets') }}/js/themeColors.js"></script>
+
+<!-- swither styles js -->
+<script src="{{ url('/assets') }}/js/swither-styles.js"></script>
+
+<!-- CUSTOM JS -->
+<script src="{{ url('/assets') }}/js/custom.js"></script>
+
+
+<script src="{{ url('/assets') }}/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+<script src="{{ url('/assets') }}/plugins/datatable/js/dataTables.buttons.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/datatable/dataTables.responsive.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/datatable/responsive.bootstrap5.min.js"></script>
+<script src="{{ url('/assets') }}/js/table-data.js"></script>

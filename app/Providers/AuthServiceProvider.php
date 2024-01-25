@@ -27,16 +27,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define("admin", function ($user) {
-            return $user->hasRole(Role::ADMIN_APP);
+        Gate::define("admin_kab", function ($user) {
+            return $user->hasRole(Role::ADMIN_KAB);
         });
 
-        Gate::define("mua", function ($user) {
-            return $user->hasRole(Role::MAKEUP_BOS);
+        Gate::define("admin_kec", function ($user) {
+            return $user->hasRole(Role::ADMIN_KEC);
         });
 
-        Gate::define("client", function ($user) {
-            return $user->hasRole(Role::MEMBER);
+        Gate::define("admin_des", function ($user) {
+            return $user->hasRole(Role::ADMIN_DES);
         });
 
         ResetPassword::createUrlUsing(function ($user, string $token) {

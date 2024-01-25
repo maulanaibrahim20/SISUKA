@@ -10,7 +10,7 @@ class Role extends SpatieRole
 {
     use HasFactory;
 
-    const ADMIN_APP = 'Admin Aplikasi';
-    const MAKEUP_BOS = 'Pemilik Jasa Makeup';
-    const MEMBER = 'Pengguna Aplikasi';
+    const ADMIN_KAB = 'Admin Kabupaten';
+    const ADMIN_KEC = 'Admin Kecamatan';
+    const ADMIN_DES = 'Admin Desa';
 }

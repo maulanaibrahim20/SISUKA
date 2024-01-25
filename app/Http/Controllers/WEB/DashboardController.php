@@ -12,13 +12,13 @@ class DashboardController extends Controller
         return view('admin.pages.dashboard.index');
     }
 
-    public function owner()
+    public function admin_kecamatan()
     {
-        return view('owner.pages.dashboard.index');
+        return view('admin_kecamatan.pages.dashboard.index');
     }
 
-    public function client()
+    public function admin_desa()
     {
-        return view('client.pages.dashboard.index');
+        return view('admin_desa.pages.dashboard.index');
     }
 }

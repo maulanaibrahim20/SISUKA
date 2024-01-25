@@ -25,10 +25,7 @@ class CreateRequest extends FormRequest
             'name' => ['required', 'string', 'max:255', 'min:3'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
-            'nama_perusahaan' => ['required', 'string', 'max:255', 'min:3'],
-            'alamat' => ['required', 'string', 'max:255', 'min:3'],
-            'no_hp' => ['required', 'string', 'max:255', 'min:3'],
-            'jk' => ['required', 'string', 'max:255', 'min:3'],
+            'kecamatan' => ['required', 'string', 'max:255', 'min:3'],
         ];
     }
 }

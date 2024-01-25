@@ -1,31 +1,27 @@
- <!-- bui{{ url('/assets') }}/vendor/js/core.js -->
- <script src="{{ url('/assets') }}/vendor/libs/jquery/jquery.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/popper/popper.js"></script>
- <script src="{{ url('/assets') }}/vendor/js/bootstrap.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/node-waves/node-waves.js"></script>
+<!-- JQUERY JS -->
+<script src="{{ url('/assets') }}/js/jquery.min.js"></script>
 
- <script src="{{ url('/assets') }}/vendor/libs/hammer/hammer.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/i18n/i18n.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/typeahead-js/typeahead.js"></script>
+<!-- BOOTSTRAP JS -->
+<script src="{{ url('/assets') }}/plugins/bootstrap/js/popper.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/bootstrap/js/bootstrap.min.js"></script>
 
- <script src="{{ url('/assets') }}/vendor/js/menu.js"></script>
- <!-- endbuild -->
+<!-- SPARKLINE JS -->
+<script src="{{ url('/assets') }}/js/jquery.sparkline.min.js"></script>
 
- <!-- Vendors JS -->
- <script src="{{ url('/assets') }}/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/cleavejs/cleave.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/cleavejs/cleave-phone.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/bs-stepper/bs-stepper.js"></script>
- <script src="{{ url('/assets') }}/vendor/libs/select2/select2.js"></script>
+<!-- CHART-CIRCLE JS -->
+<script src="{{ url('/assets') }}/js/circle-progress.min.js"></script>
 
- <!-- Main JS -->
- <script src="{{ url('/assets') }}/js/main.js"></script>
+<!-- Perfect SCROLLBAR JS-->
+<script src="{{ url('/assets') }}/plugins/p-scroll/perfect-scrollbar.js"></script>
 
- <!-- Page JS -->
- <script src="{{ url('/assets') }}/js/pages-auth.js"></script>
+<!-- INPUT MASK JS -->
+<script src="{{ url('/assets') }}/plugins/input-mask/jquery.mask.min.js"></script>
 
- <!-- Page JS -->
- <script src="{{ url('/assets') }}/js/pages-auth-multisteps.js"></script>
+<!-- Color Theme js -->
+<script src="{{ url('/assets') }}/js/themeColors.js"></script>
+
+<!-- swither styles js -->
+<script src="{{ url('/assets') }}/js/swither-styles.js"></script>
+
+<!-- CUSTOM JS -->
+<script src="{{ url('/assets') }}/js/custom.js"></script>

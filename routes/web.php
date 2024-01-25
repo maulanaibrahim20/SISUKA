@@ -1,8 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\WEB\Admin\User\ClientController;
-use App\Http\Controllers\WEB\Admin\User\OwnerController;
+use App\Http\Controllers\WEB\Admin\User\AdminKecController;
 use App\Http\Controllers\WEB\Admin\Wilayah\WilayahController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\LogoutController;
@@ -24,8 +23,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
 
 Route::middleware(['guest'])->group(function () {
 
@@ -69,31 +66,30 @@ Route::middleware(['auth'])->name('web.')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::group(['middleware' => ['can:admin']], function () {
-        Route::prefix('admin')->group(function () {
+    Route::group(['middleware' => ['can:admin_kab']], function () {
+        Route::prefix('admin/kab')->group(function () {
             Route::prefix('wilayah')->group(function () {
                 Route::get('/ambil_kecamatan', [WilayahController::class, 'ambil_kecamatan']);
                 Route::get('/ambil_kelurahan', [WilayahController::class, 'ambil_kelurahan']);
             });
 
             Route::prefix('create')->group(function () {
-                Route::resource('client', ClientController::class);
-                Route::resource('owner', OwnerController::class);
+                Route::resource('admin-kec', AdminKecController::class);
             });
             Route::get('/dashboard', [DashboardController::class, 'admin']);
         });
     });
 
-    Route::group(['middleware' => ['can:client']], function () {
-        Route::prefix('client')->group(function () {
-            Route::get('/dashboard', [DashboardController::class, 'client']);
+    Route::group(['middleware' => ['can:admin_kec']], function () {
+        Route::prefix('admin/kec')->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'admin_kecamatan']);
         });
     });
 
-    Route::group(['middleware' => ['can:mua']], function () {
-        Route::prefix('owner')->group(function () {
+    Route::group(['middleware' => ['can:admin_des']], function () {
+        Route::prefix('admin/des')->group(function () {
             Route::resource('katalog', MakeupController::class);
-            Route::get('/dashboard', [DashboardController::class, 'owner']);
+            Route::get('/dashboard', [DashboardController::class, 'admin_desa']);
         });
     });
 });

@@ -44,12 +44,12 @@ class LoginController extends Controller
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
 
-            if ($user->hasRole(Role::ADMIN_APP)) {
-                return redirect('/admin/dashboard');
-            } elseif ($user->hasRole(Role::MAKEUP_BOS)) {
-                return redirect('/owner/dashboard');
-            } elseif ($user->hasRole(Role::MEMBER)) {
-                return redirect('/client/dashboard');
+            if ($user->hasRole(Role::ADMIN_KAB)) {
+                return redirect('/admin/kab/dashboard');
+            } elseif ($user->hasRole(Role::ADMIN_KEC)) {
+                return redirect('/admin/kec/dashboard');
+            } elseif ($user->hasRole(Role::ADMIN_DES)) {
+                return redirect('/admin/des/dashboard');
             }
         }
         return back()->with('error', 'Gagal melakukan autentikasi');

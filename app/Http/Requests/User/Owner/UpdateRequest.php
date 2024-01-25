@@ -24,11 +24,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', 'min:3'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:8'],
-            'nama_perusahaan' => ['required', 'string', 'max:255', 'min:3'],
-            'alamat' => ['required', 'string', 'max:255', 'min:3'],
-            'no_hp' => ['required', 'string', 'max:255', 'min:3'],
-            'jk' => ['required', 'string', 'max:255', 'min:3'],
+            'kecamatan' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -16,9 +16,9 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-    const ADMIN_APP = 1;
-    const MAKEUP_BOS = 2;
-    const MEMBER = 3;
+    const ADMIN_KAB = 1;
+    const ADMIN_KEC = 2;
+    const ADMIN_DES = 3;
 
     /**
      * The attributes that are mass assignable.
@@ -53,7 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setFillableAttributes()
     {
-        if ($this->hasRole('MAKEUP_BOS')) {
+        if ($this->hasRole('ADMIN_KEC')) {
             $this->fillable[] = 'email_verified_at';
             $this->fillable[] = 'remember_token';
         }

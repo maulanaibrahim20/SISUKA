@@ -1,4 +1,5 @@
 @extends('index')
+@section('title', 'Dashboard Admin')
 @section('content')
     <div id="bootstrapToast" class="bs-toast toast toast-ex animate__animated my-2" role="alert" aria-live="assertive"
         aria-atomic="true" data-bs-delay="2000">

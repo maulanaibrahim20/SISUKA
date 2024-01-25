@@ -15,14 +15,14 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $adminApp = User::factory()->create([
-            "email" => "admin.app@mailinator.com"
+            "email" => "admin.kab@mailinator.com"
         ]);
-        $adminApp->assignRole(Role::findById(User::ADMIN_APP));
+        $adminApp->assignRole(Role::findById(User::ADMIN_KAB));
 
         $makeupBos = User::factory()->create([
-            "email" => "owner.app@mailinator.com"
+            "email" => "admin.kec@mailinator.com"
         ]);
-        $makeupBos->assignRole(Role::findById(User::MAKEUP_BOS));
+        $makeupBos->assignRole(Role::findById(User::ADMIN_KEC));
 
         // $member = User::factory()->create([
         //     "email" => "client.app@mailinator.com"

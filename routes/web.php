@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\WEB\Admin\User\AdminKecController;
 use App\Http\Controllers\WEB\Admin\Wilayah\WilayahController;
+use App\Http\Controllers\WEB\AdminKec\User\AdminDesController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\LogoutController;
 use App\Http\Controllers\WEB\Auth\NewPasswordController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\WEB\Auth\RegisterController;
 use App\Http\Controllers\WEB\Auth\ResetPasswordController;
 use App\Http\Controllers\WEB\Auth\VerificationController;
 use App\Http\Controllers\WEB\DashboardController;
-use App\Http\Controllers\WEB\Owner\Makeup\MakeupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,12 +83,14 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['can:admin_kec']], function () {
         Route::prefix('admin/kec')->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'admin_kecamatan']);
+            Route::prefix('create')->group(function () {
+                Route::resource('admin-des', AdminDesController::class);
+            });
         });
     });
 
     Route::group(['middleware' => ['can:admin_des']], function () {
         Route::prefix('admin/des')->group(function () {
-            Route::resource('katalog', MakeupController::class);
             Route::get('/dashboard', [DashboardController::class, 'admin_desa']);
         });
     });

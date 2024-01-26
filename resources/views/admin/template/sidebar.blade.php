@@ -59,6 +59,30 @@
                         </ul>
                     </li>
                 @endcan
+
+                @can('admin_kec')
+                    <li class="sub-category">
+                        <h3>Buat Akun</h3>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(4) == 'admin-des' ? 'active' : '' }}"
+                            data-bs-toggle="slide" href="javascript:void(0);">
+                            <i class="side-menu__icon fa fa-user-plus"></i>
+                            <span class="side-menu__label">Buat Akun</span>
+                            <i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu"
+                            style="{{ Request::segment(4) == 'admin-des' ? 'display: block;' : 'display: none;' }}">
+                            <li class="side-menu-label1"><a href="javascript:void(0)">Admin Desa</a></li>
+                            <li>
+                                <a href="{{ url('/admin/kec/create/admin-des') }}"
+                                    class="slide-item {{ Request::segment(4) == 'admin-des' ? 'active' : '' }}">
+                                    Admin Desa
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                     width="24" height="24" viewBox="0 0 24 24">

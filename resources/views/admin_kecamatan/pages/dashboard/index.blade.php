@@ -1,4 +1,5 @@
 @extends('index')
+@section('title', 'Dashboard Kecamatan')
 @section('content')
     <div class="container">
         <div class="row">

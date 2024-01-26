@@ -6,22 +6,22 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminKec extends Model
+class AdminDes extends Model
 {
     use HasFactory;
 
-    protected $table = 'admin_kec';
+    protected $table = 'admin_des';
 
     protected $guarded = [];
 
+    public function userdes()
 
-    public function userkec()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function userdes()
+    public function kecamatanRelation()
     {
-        return $this->belongsTo(AdminDes::class, 'user_id');
+        return $this->belongsTo(adminKec::class, 'kecamatan');
     }
 }

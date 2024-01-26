@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\WEB\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Facades\SendMail;
-use App\Http\Requests\User\Owner\CreateRequest;
-use App\Http\Requests\User\Owner\UpdateRequest;
+use App\Http\Requests\User\AdminKec\CreateRequest;
+use App\Http\Requests\User\AdminKec\UpdateRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\User\AdminKec;
-use App\Models\User\Owner;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -39,7 +36,6 @@ class AdminKecController extends Controller
     public function index()
     {
         $adminkec = $this->adminkec->all();
-        $kecamatan = $this->adminkec->first();
         $response = Http::get($this->wilayah . "districts/3212.json");
         $wilayahData = $response->json();
 
@@ -134,7 +130,6 @@ class AdminKecController extends Controller
     {
         try {
             DB::beginTransaction();
-
             $user = $this->adminkec->findOrFail($id);
             $user->userkec->delete();
             $user->delete();
@@ -146,7 +141,7 @@ class AdminKecController extends Controller
         } catch (\Exception $th) {
             DB::rollback();
             Alert::error('Error', 'Akun Client Gagal Dihapus' . $th->getMessage());
-            return redirect()->back()->with('error', 'Admin Kecamatan deleted failed' . $th->getMessage());
+            return back()->with('error', 'Admin Kecamatan deleted failed' . $th->getMessage());
         }
     }
 }

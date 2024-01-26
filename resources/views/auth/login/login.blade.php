@@ -1,5 +1,5 @@
 @extends('auth.index_login')
-@section('title', 'Login Cover - Pages | Vuexy - Bootstrap Admin Template')
+@section('title', 'Login Cover - Pages | Zanex - Bootstrap Admin Template')
 @section('content')
     <div class="page login-page">
         <div>

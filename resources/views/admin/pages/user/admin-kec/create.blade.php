@@ -43,16 +43,20 @@
                     <div class="col-md-12 mb-3">
                         <label for="validationCustom02">Password</label>
                         <input type="password" name="password" class="form-control" id="validationCustom02" value=""
-                            placeholder="asddd" required>
+                            placeholder="password" required>
                         <div class="valid-feedback">Looks good!</div>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="kecamatan"> Kota/Kab </label>
-                        <select name="kecamatan" class="form-control" id="kecamatan">
+                        <select name="kecamatan" class="form-control form-select select2"
+                            data-bs-placeholder="Pilih Kecamatan" id="kecamatan">
                             <option value="">- Pilih -</option>
-                            @foreach ($kota_kab as $item)
-                                <option value="{{ $item['id'] }}">
-                                    {{ $item['name'] }}
+                            @foreach ($kecamatan as $item)
+                                @php
+                                    $isDisabled = $adminKecId->contains($item->id);
+                                @endphp
+                                <option value="{{ $item->id }}" {{ $isDisabled ? 'disabled' : '' }}>
+                                    {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>

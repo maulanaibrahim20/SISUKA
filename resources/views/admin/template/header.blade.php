@@ -192,28 +192,31 @@
                                     <div class="drop-heading">
                                         <div class="text-center">
                                             <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                                            @php
-                                                $adminKec = App\Models\User\AdminKec::where('user_id', Auth::id())->first();
-                                                $kecamatan = $adminKec ? $adminKec->kecamatan : '';
-                                                $apiUrl = 'https://emsifa.github.io/api-wilayah-indonesia/api/districts/3212.json';
-                                                $response = Http::get($apiUrl);
-                                                $wilayahData = $response->json();
-                                                $wilayahName = '';
-                                                foreach ($wilayahData as $item) {
-                                                    if ($item['id'] == $kecamatan) {
-                                                        $wilayahName = $item['name'];
-                                                        break;
-                                                    }
-                                                }
-                                            @endphp
                                             <small class="text-muted">{{ auth()->user()->roles->first()->name }}
-                                                {{ $wilayahName }}</small>
+                                                @if ($user->hasRole('Admin Kecamatan'))
+                                                    {{ $kecamatan->name }}
+                                                @elseif($user->hasRole('Admin Desa'))
+                                                    {{ $desa->name }}
+                                                @elseif($user->hasRole('Admin Kabupaten'))
+                                                    Indramayu
+                                                @endif
+                                            </small>
                                         </div>
                                     </div>
                                     <div class="dropdown-divider m-0"></div>
-                                    <a class="dropdown-item" href="profile.html">
-                                        <i class="dropdown-icon fe fe-user"></i> Profile
-                                    </a>
+                                    @if (Auth::user()->hasRole('Admin Kabupaten'))
+                                        <a class="dropdown-item" href="{{ url('admin/kab/profile') }}">
+                                            <i class="dropdown-icon fe fe-user"></i> Profile
+                                        </a>
+                                    @elseif(Auth::user()->hasRole('Admin Kecamatan'))
+                                        <a class="dropdown-item" href="{{ url('admin/kec/profile') }}">
+                                            <i class="dropdown-icon fe fe-user"></i> Profile
+                                        </a>
+                                    @elseif(Auth::user()->hasRole('Admin Desa'))
+                                        <a class="dropdown-item" href="{{ url('admin/kec/profile') }}">
+                                            <i class="dropdown-icon fe fe-user"></i> Profile
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="email.html">
                                         <i class="dropdown-icon fe fe-mail"></i> Inbox
                                         <span class="badge bg-secondary float-end">3</span>

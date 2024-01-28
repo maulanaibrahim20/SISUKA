@@ -47,14 +47,18 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="desa"> Kelurahan/Desa </label>
-                        <select name="desa" class="form-control" id="desa">
+                        <select name="desa" class="form-control form-select select2" id="desa">
                             <option value="">- Pilih -</option>
                             @foreach ($desa as $item)
-                                <option value="{{ $item['id'] }}">
-                                    {{ $item['name'] }}
+                                @php
+                                    $isDisabled = $adminKecDesaId->contains($item->id);
+                                @endphp
+                                <option value="{{ $item->id }}" {{ $isDisabled ? 'disabled' : '' }}>
+                                    {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>
+
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-end">

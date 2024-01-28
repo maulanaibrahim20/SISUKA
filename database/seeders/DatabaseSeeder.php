@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Database\Seeders\Wilayah\DesaSeeder;
+use Database\Seeders\Wilayah\KecamatanSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +23,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
 
+            KecamatanSeeder::class,
+            DesaSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
         ]);

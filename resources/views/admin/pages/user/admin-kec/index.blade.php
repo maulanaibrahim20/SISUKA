@@ -3,10 +3,10 @@
 @section('content')
     <div class="page-header">
         <div>
-            <h1 class="page-title">Table</h1>
+            <h1 class="page-title">Data Admin Kecamatan</h1>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Tables</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Table</li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Buat Akun Admin Kecamatan</li>
             </ol>
         </div>
         <div class="ms-auto pageheader-btn">
@@ -42,7 +42,7 @@
                                         <td>{{ $data->userkec->name }}</td>
                                         <td>{{ $data->userkec->email }}</td>
                                         <td>
-                                            @foreach ($wilayahData as $item)
+                                            @foreach ($kecamatan as $item)
                                                 @if ($item['id'] == $data['kecamatan'])
                                                     {{ $item['name'] }}
                                                 @endif

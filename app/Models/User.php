@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Http\Traits\CheckRoles;
+use App\Models\User\AdminDes;
+use App\Models\User\AdminKec;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -57,5 +59,15 @@ class User extends Authenticatable implements MustVerifyEmail
             $this->fillable[] = 'email_verified_at';
             $this->fillable[] = 'remember_token';
         }
+    }
+
+    public function adminKec()
+    {
+        return $this->hasOne(AdminKec::class, 'user_id');
+    }
+
+    public function adminDes()
+    {
+        return $this->hasOne(AdminDes::class, 'user_id');
     }
 }

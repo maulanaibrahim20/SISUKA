@@ -4,6 +4,8 @@ namespace App\Http\Controllers\WEB\AdminKec\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\AdminDes\CreateRequest;
+use App\Http\Requests\User\AdminDes\UpdateRequest;
+use App\Models\Desa;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\User\AdminDes;
@@ -23,16 +25,18 @@ class AdminDesController extends Controller
     protected $adminkec;
     protected $admindes;
     protected $user;
-    protected $wilayah = "https://emsifa.github.io/api-wilayah-indonesia/api/";
+    protected $desa;
 
 
-    public function __construct(AdminKec $adminkec, AdminDes $admindes, User $user)
+    public function __construct(AdminKec $adminkec, AdminDes $admindes, User $user, Desa $desa)
     {
         $this->adminkec = $adminkec;
 
         $this->admindes = $admindes;
 
         $this->user = $user;
+
+        $this->desa = $desa;
     }
     /**
      * Display a listing of the resource.
@@ -40,9 +44,8 @@ class AdminDesController extends Controller
     public function index()
     {
         $userId = auth()->id();
-        $user = $this->adminkec->where('user_id', $userId)->pluck('kecamatan')->first();
-        $response = Http::get($this->wilayah . "villages/" . $user . ".json");
-        $desa = $response->json();
+        $userKecamatanId = $this->adminkec->where('user_id', $userId)->pluck('kecamatan')->first();
+        $desa = $this->desa->where('district_id', $userKecamatanId)->get();
         $admindes = $this->admindes->where('user_kecamatan', $userId)->get();
 
         return view('admin_kecamatan.pages.user.admin-des.index', compact('desa', 'admindes'));
@@ -54,10 +57,10 @@ class AdminDesController extends Controller
     public function create()
     {
         $userId = auth()->id();
-        $user = $this->adminkec->where('user_id', $userId)->pluck('kecamatan')->first();
-        $response = Http::get($this->wilayah . "villages/" . $user . ".json");
-        $desa = $response->json();
-        return view('admin_kecamatan.pages.user.admin-des.create', compact('desa'));
+        $userKecamatanId = $this->adminkec->where('user_id', $userId)->pluck('kecamatan')->first();
+        $desa = $this->desa->where('district_id', $userKecamatanId)->get();
+        $adminKecDesaId = $this->admindes->pluck('desa');
+        return view('admin_kecamatan.pages.user.admin-des.create', compact('desa', 'adminKecDesaId'));
     }
 
     /**
@@ -113,8 +116,8 @@ class AdminDesController extends Controller
     {
         $userId = auth()->id();
         $user = $this->adminkec->where('user_id', $userId)->pluck('kecamatan')->first();
-        $response = Http::get($this->wilayah . "villages/" . $user . ".json");
-        $desa = $response->json();
+        $userKecamatanId = $this->adminkec->where('user_id', $userId)->pluck('kecamatan')->first();
+        $desa = $this->desa->where('district_id', $userKecamatanId)->get();
 
         $user = $this->admindes->findOrFail($id);
         return view('admin_kecamatan.pages.user.admin-des.update', compact('user', 'desa'));
@@ -123,7 +126,7 @@ class AdminDesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
         try {
             DB::beginTransaction();

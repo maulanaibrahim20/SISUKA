@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WEB\Admin\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\AdminKec\CreateRequest;
 use App\Http\Requests\User\AdminKec\UpdateRequest;
+use App\Models\Kecamatan;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\User\AdminKec;
@@ -25,28 +26,28 @@ class AdminKecController extends Controller
 
     protected $adminkec;
 
-    protected $wilayah = "https://emsifa.github.io/api-wilayah-indonesia/api/";
+    protected $kecamatan;
 
 
-    public function __construct(User $user, AdminKec $adminkec)
+    public function __construct(User $user, AdminKec $adminkec, Kecamatan $kecamatan)
     {
         $this->user = $user;
         $this->adminkec = $adminkec;
+        $this->kecamatan = $kecamatan;
     }
     public function index()
     {
         $adminkec = $this->adminkec->all();
-        $response = Http::get($this->wilayah . "districts/3212.json");
-        $wilayahData = $response->json();
+        $kecamatan = $this->kecamatan->all();
 
-        return view('admin.pages.user.admin-kec.index', compact('wilayahData', 'adminkec'));
+        return view('admin.pages.user.admin-kec.index', compact('kecamatan', 'adminkec'));
     }
 
     public function create()
     {
-        $response = Http::get($this->wilayah . "districts/3212.json");
-        $kota_kab = $response->json();
-        return view('admin.pages.user.admin-kec.create', compact('kota_kab'));
+        $kecamatan = $this->kecamatan->all();
+        $adminKecId = $this->adminkec::pluck('kecamatan');
+        return view('admin.pages.user.admin-kec.create', compact('kecamatan', 'adminKecId'));
     }
 
     public function store(CreateRequest $request)
@@ -88,11 +89,9 @@ class AdminKecController extends Controller
 
     public function edit($id)
     {
-        $kecamatan = $this->adminkec->first();
-        $response = Http::get($this->wilayah . "districts/3212.json");
-        $wilayahData = $response->json();
+        $kecamatan = $this->kecamatan->all();
         $user = $this->adminkec->findOrFail($id);
-        return view('admin.pages.user.admin-kec.update', compact('user', 'wilayahData'));
+        return view('admin.pages.user.admin-kec.update', compact('user', 'kecamatan'));
     }
 
     public function update(UpdateRequest $request, $id)

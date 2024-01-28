@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\WEB;
 
 use App\Http\Controllers\Controller;
+use App\Models\User\AdminDes;
+use App\Models\User\AdminKec;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function admin()
     {
-        return view('admin.pages.dashboard.index');
+        $data = [
+            'jumlah_admin_kecamatan' => AdminKec::count(),
+            'jumlah_admin_desa' => AdminDes::count(),
+        ];
+        return view('admin.pages.dashboard.index', $data);
     }
 
     public function admin_kecamatan()

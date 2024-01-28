@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User\AdminDes;
+namespace App\Http\Requests\Pengaturan;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class UpdatePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'desa' => 'required|string|max:255|min:3',
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
         ];
     }
 }

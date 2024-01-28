@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\WEB\Admin\Master\MasterDesaController;
+use App\Http\Controllers\WEB\Admin\Master\MasterKecamatanController;
+use App\Http\Controllers\WEB\Admin\Pengaturan\ProfileController;
 use App\Http\Controllers\WEB\Admin\User\AdminKecController;
 use App\Http\Controllers\WEB\Admin\Wilayah\WilayahController;
 use App\Http\Controllers\WEB\AdminKec\User\AdminDesController;
@@ -68,13 +71,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => ['can:admin_kab']], function () {
         Route::prefix('admin/kab')->group(function () {
-            Route::prefix('wilayah')->group(function () {
-                Route::get('/ambil_kecamatan', [WilayahController::class, 'ambil_kecamatan']);
-                Route::get('/ambil_kelurahan', [WilayahController::class, 'ambil_kelurahan']);
-            });
-
             Route::prefix('create')->group(function () {
                 Route::resource('admin-kec', AdminKecController::class);
+            });
+            Route::prefix('profile')->group(function () {
+                Route::get('/', [ProfileController::class, 'index']);
+                Route::get('/edit_profile', [ProfileController::class, 'edit']);
+                Route::put('/proccess_edit_profile/{id}', [ProfileController::class, 'update_profile']);
+                Route::put('/proccess_update_password/{id}', [ProfileController::class, 'update_password']);
             });
             Route::get('/dashboard', [DashboardController::class, 'admin']);
         });

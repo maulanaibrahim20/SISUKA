@@ -27,4 +27,9 @@ class DashboardController extends Controller
     {
         return view('admin_desa.pages.dashboard.index');
     }
+
+    public function staff_kab()
+    {
+        return view('admin.staff_kab.pages.dashboard.index');
+    }
 }

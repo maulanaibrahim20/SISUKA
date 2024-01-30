@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Http;
 
 
 class AdminKecController extends Controller

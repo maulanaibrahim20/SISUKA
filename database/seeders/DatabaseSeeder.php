@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use Database\Seeders\Wilayah\DesaSeeder;
 use Database\Seeders\Wilayah\KecamatanSeeder;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
             DesaSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            JabatanSeeder::class,
         ]);
     }
 }

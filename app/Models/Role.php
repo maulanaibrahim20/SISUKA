@@ -13,4 +13,7 @@ class Role extends SpatieRole
     const ADMIN_KAB = 'Admin Kabupaten';
     const ADMIN_KEC = 'Admin Kecamatan';
     const ADMIN_DES = 'Admin Desa';
+    const STAFF_KAB = 'Staff Kabupaten';
+    const STAFF_KEC = 'Staff Kecamatan';
+    const STAFF_DESA = 'Staff Desa';
 }

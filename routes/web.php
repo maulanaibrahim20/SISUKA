@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\WEB\Admin\Master\MasterDesaController;
-use App\Http\Controllers\WEB\Admin\Master\MasterKecamatanController;
+use App\Http\Controllers\WEB\Admin\Master\JabatanKabupatenController;
+use App\Http\Controllers\WEB\Admin\Master\PermissionController;
 use App\Http\Controllers\WEB\Admin\Pengaturan\ProfileController;
+use App\Http\Controllers\WEB\Admin\Permission\RoleController;
 use App\Http\Controllers\WEB\Admin\User\AdminKecController;
-use App\Http\Controllers\WEB\Admin\Wilayah\WilayahController;
+use App\Http\Controllers\WEB\Admin\User\StaffKabController;
 use App\Http\Controllers\WEB\AdminKec\User\AdminDesController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\LogoutController;
@@ -27,9 +28,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['guest'])->group(function () {
+Route::get('/', function () {
+    return view('welcome');
+});
 
-    Route::get('/masuk', [AppController::class, 'index']);
+Route::middleware(['guest'])->group(function () {
 
     Route::prefix('login')->name('login.')->group(function () {
         Route::get('/', [LoginController::class, 'index'])
@@ -71,8 +74,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => ['can:admin_kab']], function () {
         Route::prefix('admin/kab')->group(function () {
+
+            Route::prefix('master')->group(function () {
+                Route::resource('jabatan', JabatanKabupatenController::class);
+                Route::resource('role', RoleController::class);
+            });
             Route::prefix('create')->group(function () {
                 Route::resource('admin-kec', AdminKecController::class);
+                Route::resource('staff', StaffKabController::class);
             });
             Route::prefix('profile')->group(function () {
                 Route::get('/', [ProfileController::class, 'index']);
@@ -83,6 +92,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'admin']);
         });
     });
+
+    Route::group(['middleware' => ['can:staff_kab']], function () {
+        Route::prefix('staff/kab')->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'staff_kab']);
+        });
+    });
+
 
     Route::group(['middleware' => ['can:admin_kec']], function () {
         Route::prefix('admin/kec')->group(function () {

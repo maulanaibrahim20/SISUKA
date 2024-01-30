@@ -31,6 +31,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRole(Role::ADMIN_KAB);
         });
 
+        Gate::define("staff_kab", function ($user) {
+            return $user->hasRole(Role::STAFF_KAB);
+        });
+
         Gate::define("admin_kec", function ($user) {
             return $user->hasRole(Role::ADMIN_KEC);
         });
@@ -38,6 +42,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define("admin_des", function ($user) {
             return $user->hasRole(Role::ADMIN_DES);
         });
+
 
         ResetPassword::createUrlUsing(function ($user, string $token) {
             return url("/new-password?token=$token&email=$user->email");

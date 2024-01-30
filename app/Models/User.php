@@ -21,6 +21,9 @@ class User extends Authenticatable implements MustVerifyEmail
     const ADMIN_KAB = 1;
     const ADMIN_KEC = 2;
     const ADMIN_DES = 3;
+    const STAFF_KAB = 4;
+    const STAFF_KEC = 5;
+    const STAFF_DES = 6;
 
     /**
      * The attributes that are mass assignable.
@@ -55,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setFillableAttributes()
     {
-        if ($this->hasRole('ADMIN_KEC')) {
+        if ($this->hasRole('ADMIN_KEC', 'STAFF_KAB')) {
             $this->fillable[] = 'email_verified_at';
             $this->fillable[] = 'remember_token';
         }

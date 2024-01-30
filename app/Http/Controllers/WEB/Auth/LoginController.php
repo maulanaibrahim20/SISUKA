@@ -46,6 +46,8 @@ class LoginController extends Controller
 
             if ($user->hasRole(Role::ADMIN_KAB)) {
                 return redirect('/admin/kab/dashboard');
+            } elseif ($user->hasRole(Role::STAFF_KAB)) {
+                return redirect('/staff/kab/dashboard');
             } elseif ($user->hasRole(Role::ADMIN_KEC)) {
                 return redirect('/admin/kec/dashboard');
             } elseif ($user->hasRole(Role::ADMIN_DES)) {

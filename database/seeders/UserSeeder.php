@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin\StaffKabupaten;
 use App\Models\Desa;
 use App\Models\Kecamatan;
+use App\Models\Master\JabatanKabupaten;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\User\AdminDes;
@@ -22,6 +24,17 @@ class UserSeeder extends Seeder
             "email" => "admin.kab@mailinator.com"
         ]);
         $adminApp->assignRole(Role::findById(User::ADMIN_KAB));
+
+
+        $staffKab = User::factory()->create([
+            "email" => "staff.kab@mailinator.com",
+        ]);
+        $jabatanId = JabatanKabupaten::where('name', 'Sekretaris Daerah')->pluck('id')->first();
+        StaffKabupaten::create([
+            'user_id' => $staffKab->id,
+            'jabatan_kabupaten_id' => $jabatanId,
+        ]);
+        $staffKab->assignRole(Role::findById(User::STAFF_KAB));
 
 
         $makeupBos = User::factory()->create([

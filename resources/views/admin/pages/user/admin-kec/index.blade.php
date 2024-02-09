@@ -6,7 +6,7 @@
             <h1 class="page-title">Data Admin Kecamatan</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Buat Akun Admin Kecamatan</li>
+                <li class="breadcrumb-item active" aria-current="page">Admin Kecamatan</li>
             </ol>
         </div>
         <div class="ms-auto pageheader-btn">
@@ -24,6 +24,17 @@
                     <h3 class="card-title">Table Data Admin Kecamatan</h3>
                 </div>
                 <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable">
                             <thead>

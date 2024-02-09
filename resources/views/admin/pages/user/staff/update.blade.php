@@ -1,12 +1,12 @@
 @extends('index')
-@section('title', 'Update Admin Kecamatan')
+@section('title', 'Admin Kecamatan Update')
 @section('content')
     <div class="page-header">
         <div>
-            <h1 class="page-title">Update Admin Kecamatan</h1>
+            <h1 class="page-title">Create Admin</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Update Admin Kecamatan</li>
+                <li class="breadcrumb-item active" aria-current="page">Create Admin</li>
             </ol>
         </div>
     </div>
@@ -26,36 +26,38 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                <form action="{{ url('/admin/kab/create/admin-kec/' . $user->id) }}" method="POST" class="needs-validation"
+                <form action="{{ url('/admin/kab/create/staff/' . $staff->id) }}" method="POST" class="needs-validation"
                     novalidate>
-                    @method('PUT')
                     @csrf
+                    @method('PUT')
                     <div class="col-md-12 mb-3">
                         <label for="validationCustom01">Nama Admin</label>
-                        <input value="{{ $user->userkec->name }}" type="text" name="name" class="form-control"
-                            id="validationCustom01" value="" placeholder="asd" required>
+                        <input type="text" name="name" class="form-control" id="validationCustom01"
+                            value="{{ $staff->user->name }}" placeholder="asd" required>
                         <div class="valid-feedback">Looks good!</div>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="validationCustom02">Email</label>
-                        <input value="{{ $user->userkec->email }}" type="email" name="email" class="form-control"
-                            id="validationCustom02" value="" placeholder="asd@mail.com" required>
+                        <input type="email" name="email" class="form-control" id="validationCustom02"
+                            value="{{ $staff->user->email }}" placeholder="asd@mail.com" required>
                         <div class="valid-feedback">Looks good!</div>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="kecamatan"> Kota/Kab </label>
-                        <select name="kecamatan" class="form-control" id="kecamatan">
+                        <label for="kecamatan"> Jabatan </label>
+                        <select name="jabatan" class="form-control form-select select2"
+                            data-bs-placeholder="Pilih Kecamatan" id="jabatan">
                             <option value="">- Pilih -</option>
-                            @foreach ($kecamatan as $item)
-                                <option value="{{ $item['id'] }}" @if ($item['id'] == $user['kecamatan']) selected @endif>
-                                    {{ $item['name'] }}
+                            @foreach ($jabatan as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ $staff->jabatan_kabupaten_id == $item->id ? 'selected' : '' }}>
+                                    {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-end">
-                            <a href="{{ url('/admin/kab/create/admin-kec') }}" type="submit" class="btn btn-warning"><i
+                            <a href="{{ url('/superadmin/create/admin') }}" type="submit" class="btn btn-warning"><i
                                     class="fa fa-arrow-left"></i>Back</a>
                             <button type="submit" class="btn btn-primary ms-2">Submit</button>
                         </div>

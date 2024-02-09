@@ -14,6 +14,8 @@
 <!-- CHARTJS CHART JS-->
 <script src="{{ url('/assets') }}/plugins/chart/Chart.bundle.js"></script>
 <script src="{{ url('/assets') }}/plugins/chart/utils.js"></script>
+<script src="{{ url('/assets') }}/plugins/charts-c3/d3.v5.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/charts-c3/c3-chart.js"></script>
 
 <!-- PIETY CHART JS-->
 <script src="{{ url('/assets') }}/plugins/peitychart/jquery.peity.min.js"></script>
@@ -69,3 +71,8 @@
 <script src="{{ url('/assets') }}/js/table-data.js"></script>
 <script src="{{ url('/assets') }}/plugins/multipleselect/multiple-select.js"></script>
 <script src="{{ url('/assets') }}/plugins/multipleselect/multi-select.js"></script>
+
+<script src="{{ url('/assets') }}/plugins/jquery-countdown/jquery.plugin.min.js"></script>
+<script src="{{ url('/assets') }}/plugins/jquery-countdown/jquery.countdown.js"></script>
+<script src="{{ url('/assets') }}/plugins/jquery-countdown/countdown.js"></script>
+<script src="{{ url('/assets') }}/plugins/input-mask/jquery.mask.min.js"></script>

@@ -7,7 +7,10 @@ use App\Http\Controllers\WEB\Admin\Pengaturan\ProfileController;
 use App\Http\Controllers\WEB\Admin\Permission\RoleController;
 use App\Http\Controllers\WEB\Admin\User\AdminKecController;
 use App\Http\Controllers\WEB\Admin\User\StaffKabController;
+use App\Http\Controllers\WEB\Admin\User\UserController;
+use App\Http\Controllers\WEB\AdminKec\Master\JabatanKecamatanController;
 use App\Http\Controllers\WEB\AdminKec\User\AdminDesController;
+use App\Http\Controllers\WEB\Adminkec\User\StaffKecController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\LogoutController;
 use App\Http\Controllers\WEB\Auth\NewPasswordController;
@@ -15,6 +18,7 @@ use App\Http\Controllers\WEB\Auth\RegisterController;
 use App\Http\Controllers\WEB\Auth\ResetPasswordController;
 use App\Http\Controllers\WEB\Auth\VerificationController;
 use App\Http\Controllers\WEB\DashboardController;
+use App\Http\Controllers\WEB\StaffKab\Persuratan\SuratMasukController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,7 +78,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => ['can:admin_kab']], function () {
         Route::prefix('admin/kab')->group(function () {
-
             Route::prefix('master')->group(function () {
                 Route::resource('jabatan', JabatanKabupatenController::class);
                 Route::resource('role', RoleController::class);
@@ -96,6 +99,10 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['can:staff_kab']], function () {
         Route::prefix('staff/kab')->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'staff_kab']);
+            Route::get('/undermaintanance', function () {
+                return view('admin.template.maintanance');
+            });
+            Route::resource('surat_masuk', SuratMasukController::class);
         });
     });
 
@@ -105,6 +112,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'admin_kecamatan']);
             Route::prefix('create')->group(function () {
                 Route::resource('admin-des', AdminDesController::class);
+                Route::resource('staff', StaffKecController::class);
+            });
+
+            Route::prefix('master')->group(function () {
+                Route::resource('jabatan', JabatanKecamatanController::class);
             });
         });
     });

@@ -101,19 +101,76 @@
                         <h3>Buat Akun</h3>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item {{ Request::segment(4) == 'admin-des' ? 'active' : '' }}"
+                        <a class="side-menu__item {{ Request::segment(4) == 'admin-des' || Request::segment(4) == 'staff' ? 'active' : '' }}"
                             data-bs-toggle="slide" href="javascript:void(0);">
                             <i class="side-menu__icon fa fa-user-plus"></i>
                             <span class="side-menu__label">Buat Akun</span>
                             <i class="angle fa fa-angle-right"></i>
                         </a>
                         <ul class="slide-menu"
-                            style="{{ Request::segment(4) == 'admin-des' ? 'display: block;' : 'display: none;' }}">
+                            style="{{ Request::segment(4) == 'admin-des' || Request::segment(4) == 'staff' ? 'display: block;' : 'display: none;' }}">
                             <li class="side-menu-label1"><a href="javascript:void(0)">Admin Desa</a></li>
                             <li>
                                 <a href="{{ url('/admin/kec/create/admin-des') }}"
                                     class="slide-item {{ Request::segment(4) == 'admin-des' ? 'active' : '' }}">
                                     Admin Desa
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/kec/create/staff') }}"
+                                    class="slide-item {{ Request::segment(4) == 'staff' ? 'active' : '' }}">
+                                    Staff Kecamatan
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sub-category">
+                        <h3>Master</h3>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(4) == 'jabatan' ? 'active' : '' }}"
+                            data-bs-toggle="slide" href="javascript:void(0);">
+                            <i class="side-menu__icon fa fa-database"></i>
+                            <span class="side-menu__label">Master</span>
+                            <i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu"
+                            style="{{ Request::segment(4) == 'jabatan' ? 'display: block;' : 'display: none;' }}">
+                            <li class="side-menu-label1"><a href="javascript:void(0)">Jabatan</a></li>
+                            <li>
+                                <a href="{{ url('/admin/kec/master/jabatan') }}"
+                                    class="slide-item {{ Request::segment(4) == 'jabatan' ? 'active' : '' }}">
+                                    Jabatan
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+
+                @can('staff_kab')
+                    <li class="sub-category">
+                        <h3>Persuratan</h3>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(3) == 'surat_masuk' || Request::segment(3) == 'undermaintanance' ? 'active' : '' }}"
+                            data-bs-toggle="slide" href="javascript:void(0);">
+                            <i class="side-menu__icon fa fa-envelope"></i>
+                            <span class="side-menu__label">Persuratan</span>
+                            <i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu"
+                            style="{{ Request::segment(3) == 'surat_masuk' || Request::segment(3) == 'undermaintanance' ? 'display: block;' : 'display: none;' }}">
+                            <li class="side-menu-label1"><a href="javascript:void(0)">Persuratan</a></li>
+                            <li>
+                                <a href="{{ url('/staff/kab/surat_masuk') }}"
+                                    class="slide-item {{ Request::segment(3) == 'surat_masuk' ? 'active' : '' }}">
+                                    Surat Masuk
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/staff/kab/undermaintanance') }}"
+                                    class="slide-item {{ Request::segment(3) == 'undermaintanance' ? 'active' : '' }}">
+                                    Surat Keluar
                                 </a>
                             </li>
                         </ul>

@@ -1,9 +1,9 @@
 @extends('index')
-@section('title', 'Admin Kecamatan')
+@section('title', 'Tambah Staff Kecamatan')
 @section('content')
     <div class="page-header">
         <div>
-            <h1 class="page-title">Create Admin Desa</h1>
+            <h1 class="page-title">Create Admin</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Create Admin</li>
@@ -14,27 +14,27 @@
         <div class="card">
             <div class="card-body">
                 @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success">
                         {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-
                 @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-danger">
                         {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                <form action="{{ url('/admin/kab/create/admin-kec') }}" method="POST" class="needs-validation" novalidate>
+                <form action="{{ url('/admin/kec/create/staff') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
                     <div class="col-md-12 mb-3">
-                        <label for="validationCustom01">Nama Admin</label>
+                        <label for="validationCustom01">Nama Staff</label>
                         <input type="text" name="name" class="form-control" id="validationCustom01" value=""
                             placeholder="asd" required>
                         <div class="valid-feedback">Looks good!</div>
                     </div>
                     <div class="col-md-12 mb-3">
+                        <div class="bg-danger-transparent-2 text-success px-4 py-2 br-3 mb-4">example :
+                            staff.kec.(jabatan)@example.com
+                        </div>
                         <label for="validationCustom02">Email</label>
                         <input type="email" name="email" class="form-control" id="validationCustom02" value=""
                             placeholder="asd@mail.com" required>
@@ -47,13 +47,13 @@
                         <div class="valid-feedback">Looks good!</div>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="kecamatan"> Kecamatan </label>
-                        <select name="kecamatan" class="form-control form-select select2"
-                            data-bs-placeholder="Pilih Kecamatan" id="kecamatan">
+                        <label for="jabatan">Jabatan</label>
+                        <select name="jabatan" class="form-control form-select select2" data-bs-placeholder="Pilih Jabatan"
+                            id="jabatan">
                             <option value="">- Pilih -</option>
-                            @foreach ($kecamatan as $item)
+                            @foreach ($jabatan as $item)
                                 @php
-                                    $isDisabled = $adminKecId->contains($item->id);
+                                    $isDisabled = $staff->contains($item->id);
                                 @endphp
                                 <option value="{{ $item->id }}" {{ $isDisabled ? 'disabled' : '' }}>
                                     {{ $item->name }}
@@ -63,7 +63,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-end">
-                            <a href="{{ url('/admin/kab/create/admin-kec') }}" type="submit" class="btn btn-warning"><i
+                            <a href="{{ url('/superadmin/create/admin') }}" type="submit" class="btn btn-warning"><i
                                     class="fa fa-arrow-left"></i>Back</a>
                             <button type="submit" class="btn btn-primary ms-2">Submit</button>
                         </div>
@@ -73,42 +73,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('script')
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $("#kota_kab").change(function() {
-                let kota_kab = $("#kota_kab").val(); // Mengambil nilai kota/kabupaten yang dipilih
-                $.ajax({
-                    url: "{{ url('/admin/wilayah/ambil_kecamatan') }}",
-                    type: "GET",
-                    data: {
-                        kota_kab: kota_kab
-                    },
-                    success: function(res) {
-                        $("#kecamatan").html(res);
-                    },
-                    error: function() {
-                        alert('Gagal mengambil data kecamatan.');
-                    }
-                });
-            });
-            $("#kecamatan").change(function() {
-                let kecamatan = $("#kecamatan").val();
-                $.ajax({
-                    url: "{{ url('/admin/wilayah/ambil_kelurahan') }}",
-                    type: "GET",
-                    data: {
-                        kecamatan: kecamatan
-                    },
-                    success: function(res) {
-                        $("#kelurahan").html(res);
-                    },
-                    error: function() {
-                        alert('Gagal mengambil data kelurahan.');
-                    }
-                });
-            });
-        });
-    </script> --}}
 @endsection

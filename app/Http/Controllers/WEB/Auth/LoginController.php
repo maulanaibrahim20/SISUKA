@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -41,9 +42,11 @@ class LoginController extends Controller
             alert::warning('Maaf Akun Anda Belum Terverifikasi');
             return back()->with('error', 'Maaf Akun Anda Belum Terverifikasi');
         }
+        $user->last_login = Carbon::now()->timezone('Asia/Jakarta');
+        $user->save();
+
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
-
             if ($user->hasRole(Role::ADMIN_KAB)) {
                 return redirect('/admin/kab/dashboard');
             } elseif ($user->hasRole(Role::STAFF_KAB)) {

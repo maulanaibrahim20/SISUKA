@@ -27,4 +27,23 @@ class UpdateRequest extends FormRequest
             'desa' => 'required|string|max:255|min:3',
         ];
     }
+    public function failedValidation($validator)
+    {
+        $errors = $validator->errors();
+
+        if ($errors->has('email')) {
+            $errorMessage = 'Email sudah terdaftar, silakan gunakan email lain.';
+        } elseif ($errors->has('name')) {
+            $errorMessage = 'Nama harus diisi.';
+        } elseif ($errors->has('password')) {
+            $errorMessage = 'Password harus diisi.';
+        } elseif ($errors->has('desa')) {
+            $errorMessage = 'Desa harus diisi.';
+        } else {
+            $errorMessage = 'Terdapat kesalahan pada input Anda.';
+        }
+
+        session()->flash('error', $errorMessage);
+        return redirect()->back()->withInput();
+    }
 }

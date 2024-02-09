@@ -191,25 +191,18 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <div class="drop-heading">
                                         <div class="text-center">
-                                            @if (Auth::user()->hasRole('Admin Kabupaten', 'Admin Kecamatan', 'Admin Desa'))
-                                                <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                                                <small class="text-muted">{{ auth()->user()->roles->first()->name }}
-                                                    @if ($user->hasRole('Admin Kecamatan'))
-                                                        {{ $kecamatan->name }}
-                                                    @elseif($user->hasRole('Admin Desa'))
-                                                        {{ $desa->name }}
-                                                    @elseif($user->hasRole('Admin Kabupaten'))
-                                                        Indramayu
-                                                    @endif
-                                                </small>
-                                            @elseif(Auth::user()->hasRole('Staff Kabupaten'))
-                                                <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
-                                                <small class="text-muted">{{ auth()->user()->roles->first()->name }}
-                                                    @if ($user->hasRole('Staff Kabupaten'))
-                                                        {{ $jabatan }}
-                                                    @endif
-                                                </small>
-                                            @endif
+                                            <h5 class="text-dark mb-0">{{ Auth::user()->name }}</h5>
+                                            <small class="text-muted">{{ auth()->user()->roles->first()->name }}
+                                                @if (Auth::user()->hasRole('Admin Kecamatan'))
+                                                    {{ $kecamatan->name }}
+                                                @elseif(Auth::user()->hasRole('Admin Desa'))
+                                                    {{ $desa->name }}
+                                                @elseif(Auth::user()->hasRole('Staff Kabupaten'))
+                                                    {{ $jabatan }}
+                                                @elseif(Auth::user()->hasRole('Admin Kabupaten'))
+                                                    Indramayu
+                                                @endif
+                                            </small>
                                         </div>
                                     </div>
                                     <div class="dropdown-divider m-0"></div>

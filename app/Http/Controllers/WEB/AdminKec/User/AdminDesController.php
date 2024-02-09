@@ -12,10 +12,12 @@ use App\Models\User\AdminDes;
 use App\Models\User\AdminKec;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Str;
 
 
 
@@ -77,6 +79,10 @@ class AdminDesController extends Controller
                 'password' => Hash::make($request->password),
             ]);
             $user->assignRole(Role::findById($this->user::ADMIN_DES));
+            $user->setFillableAttributes();
+            $user->email_verified_at = Carbon::now();
+            $user->remember_token = Str::random(10);
+            $user->save();
 
             $this->admindes->create([
                 'user_id' => $user->id,
@@ -94,10 +100,16 @@ class AdminDesController extends Controller
                 ->back()
                 ->withInput()
                 ->withErrors($e->errors());
-        } catch (ValidationException $th) {
+        } catch (QueryException $th) {
             DB::rollBack();
-            Alert::error('Error', $th->getMessage());
-            return back()->with('error', 'Data Owner Gagal Di Buat' . $th->getMessage());
+            if ($th->errorInfo[1] == 1062) {
+                Alert::error('Error', 'Email sudah terdaftar, silakan gunakan email lain.');
+                session()->flash('error', 'Email sudah terdaftar, silakan gunakan email lain.');
+            } else {
+                Alert::error('Error', $th->getMessage());
+                session()->flash('error', $th->getMessage());
+            }
+            return back()->withInput();
         }
     }
 
@@ -150,10 +162,16 @@ class AdminDesController extends Controller
                 ->back()
                 ->withInput()
                 ->withErrors($e->errors());
-        } catch (ValidationException $th) {
+        } catch (QueryException $th) {
             DB::rollBack();
-            Alert::error('Error', $th->getMessage());
-            return back()->with('error', 'Data Owner Gagal Di Buat' . $th->getMessage());
+            if ($th->errorInfo[1] == 1062) {
+                Alert::error('Error', 'Email sudah terdaftar, silakan gunakan email lain.');
+                session()->flash('error', 'Email sudah terdaftar, silakan gunakan email lain.');
+            } else {
+                Alert::error('Error', $th->getMessage());
+                session()->flash('error', $th->getMessage());
+            }
+            return back()->withInput();
         }
     }
 

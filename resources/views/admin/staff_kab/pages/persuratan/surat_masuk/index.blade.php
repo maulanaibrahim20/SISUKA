@@ -1,16 +1,16 @@
 @extends('index')
-@section('title', 'Create Role')
+@section('title', 'Admin Staff Surat Masuk')
 @section('content')
     <div class="page-header">
         <div>
-            <h1 class="page-title">Data Role</h1>
+            <h1 class="page-title">Surat Masuk</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Buat Role</li>
+                <li class="breadcrumb-item active" aria-current="page">Surat Masuk</li>
             </ol>
         </div>
         <div class="ms-auto pageheader-btn">
-            <a href="{{ url('/admin/kab/create/staff/create') }}" class="btn btn-success btn-icon text-white">
+            <a href="{{ url('/staff/kab/surat_masuk/create') }}" class="btn btn-success btn-icon text-white">
                 <span>
                     <i class="fe fe-plus"></i>
                 </span> Tambah Data
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Table Data Role</h3>
+                    <h3 class="card-title">Table Surat Masuk</h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -31,24 +31,29 @@
                                     <th style="width:80px;"><strong>No.</strong></th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Jabatan</th>
-                                    <th>Kab/Kec</th>
+                                    <th>kecamatan</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($staff as $data)
+                                {{-- @foreach ($adminkec as $data)
                                     <tr>
                                         <td><strong>{{ $loop->iteration }}</strong></td>
-                                        <td>{{ $data->user->name }}</td>
-                                        <td>{{ $data->user->email }}</td>
-                                        <td>{{ $data->jabatan->name }}</td>
-                                        <td>{{ $data->user->email }}</td>
+                                        <td>{{ $data->userkec->name }}</td>
+                                        <td>{{ $data->userkec->email }}</td>
+                                        <td>
+                                            @foreach ($kecamatan as $item)
+                                                @if ($item['id'] == $data['kecamatan'])
+                                                    {{ $item['name'] }}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td class="text-center">
                                             <a href="{{ url('/admin/kab/create/admin-kec/' . $data->id . '/edit') }}"
                                                 class="btn btn-icon btn-warning"><i class="fe fe-edit"></i></a>
                                             <form style="display: inline;"
-                                                action="{{ url('/admin/kab/permssion/role/' . $data->id) }}" method="post">
+                                                action="{{ url('/admin/kab/create/admin-kec/' . $data->id) }}"
+                                                method="post">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" data-id="{{ $data->id }}"
@@ -58,7 +63,7 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>

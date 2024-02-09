@@ -58,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setFillableAttributes()
     {
-        if ($this->hasRole('ADMIN_KEC', 'STAFF_KAB')) {
+        if ($this->hasRole(['ADMIN_KEC', 'ADMIN_DES', 'STAFF_KAB', 'STAFF_KEC', 'STAFF_DES'])) {
             $this->fillable[] = 'email_verified_at';
             $this->fillable[] = 'remember_token';
         }

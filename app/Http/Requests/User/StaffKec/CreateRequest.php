@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Requests\User\AdminDes;
+namespace App\Http\Requests\User\StaffKec;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Validator;
 
 class CreateRequest extends FormRequest
 {
@@ -24,10 +22,10 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'min:3'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8'],
-            'desa' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'jabatan_kecamatan_id' => ['required', 'exists:jabatan_kecamatan,id'],
         ];
     }
 
@@ -41,12 +39,11 @@ class CreateRequest extends FormRequest
             $errorMessage = 'Nama harus diisi.';
         } elseif ($errors->has('password')) {
             $errorMessage = 'Password harus diisi.';
-        } elseif ($errors->has('desa')) {
-            $errorMessage = 'Desa harus diisi.';
+        } elseif ($errors->has('jabatan_kecamatan_id')) {
+            $errorMessage = 'jabatan harus diisi.';
         } else {
             $errorMessage = 'Terdapat kesalahan pada input Anda.';
         }
-
         session()->flash('error', $errorMessage);
         return redirect()->back()->withInput();
     }

@@ -9,12 +9,12 @@ class SuratMasukController extends Controller
 {
     public function index()
     {
-        return view('admin.staff_kab.pages.persuratan.surat_masuk.index');
+        return view('staff_kab.pages.persuratan.surat_masuk.index');
     }
 
     public function create()
     {
-        return view('admin.staff_kab.pages.persuratan.surat_masuk.create');
+        return view('staff_kab.pages.persuratan.surat_masuk.create');
     }
 
     public function store(Request $request)

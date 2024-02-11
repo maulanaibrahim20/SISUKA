@@ -55,7 +55,7 @@ class DashboardController extends Controller
     }
     public function staff_kab()
     {
-        return view('admin.staff_kab.pages.dashboard.index');
+        return view('staff_kab.pages.dashboard.index');
     }
 
 
@@ -66,7 +66,7 @@ class DashboardController extends Controller
 
     public function staff_kecamatan()
     {
-        return view('admin_kecamatan.staff_kec.pages.dashboard.index');
+        return view('staff_kec.pages.dashboard.index');
     }
 
     public function admin_desa()
@@ -76,6 +76,6 @@ class DashboardController extends Controller
 
     public function staff_desa()
     {
-        return view('admin_desa.staff_desa.pages.dashboard.index');
+        return view('staff_desa.pages.dashboard.index');
     }
 }

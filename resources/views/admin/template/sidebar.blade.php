@@ -35,6 +35,12 @@
                                 @elseif(Auth::user()->hasRole('Staff Kabupaten'))
                                     <a class="side-menu__item {{ Request::segment(3) == 'dashboard' ? 'active' : '' }}"
                                         data-bs-toggle="slide" href="{{ url('/staff/kab/dashboard') }}">
+                                    @elseif(Auth::user()->hasRole('Staff Kecamatan'))
+                                        <a class="side-menu__item {{ Request::segment(3) == 'dashboard' ? 'active' : '' }}"
+                                            data-bs-toggle="slide" href="{{ url('/staff/kec/dashboard') }}">
+                                        @elseif(Auth::user()->hasRole('Staff Desa'))
+                                            <a class="side-menu__item {{ Request::segment(3) == 'dashboard' ? 'active' : '' }}"
+                                                data-bs-toggle="slide" href="{{ url('/staff/des/dashboard') }}">
                     @endif
                     <i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dashboard</span></a>
                 </li>

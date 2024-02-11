@@ -53,6 +53,10 @@ class DashboardController extends Controller
             'desaData' => $desaData,
         ]);
     }
+    public function staff_kab()
+    {
+        return view('admin.staff_kab.pages.dashboard.index');
+    }
 
 
     public function admin_kecamatan()
@@ -60,13 +64,18 @@ class DashboardController extends Controller
         return view('admin_kecamatan.pages.dashboard.index');
     }
 
+    public function staff_kecamatan()
+    {
+        return view('admin_kecamatan.staff_kec.pages.dashboard.index');
+    }
+
     public function admin_desa()
     {
         return view('admin_desa.pages.dashboard.index');
     }
 
-    public function staff_kab()
+    public function staff_desa()
     {
-        return view('admin.staff_kab.pages.dashboard.index');
+        return view('admin_desa.staff_desa.pages.dashboard.index');
     }
 }

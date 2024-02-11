@@ -53,8 +53,12 @@ class LoginController extends Controller
                 return redirect('/staff/kab/dashboard');
             } elseif ($user->hasRole(Role::ADMIN_KEC)) {
                 return redirect('/admin/kec/dashboard');
+            } elseif ($user->hasRole(Role::STAFF_KEC)) {
+                return redirect('/staff/kec/dashboard');
             } elseif ($user->hasRole(Role::ADMIN_DES)) {
                 return redirect('/admin/des/dashboard');
+            } elseif ($user->hasRole(Role::STAFF_DESA)) {
+                return redirect('/staff/des/dashboard');
             }
         }
         return back()->with('error', 'Gagal melakukan autentikasi');

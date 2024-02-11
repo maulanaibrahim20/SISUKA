@@ -121,9 +121,21 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
+    Route::group(['middleware' => ['can:staff_kec']], function () {
+        Route::prefix('staff/kec')->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'staff_kecamatan']);
+        });
+    });
+
     Route::group(['middleware' => ['can:admin_des']], function () {
         Route::prefix('admin/des')->group(function () {
             Route::get('/dashboard', [DashboardController::class, 'admin_desa']);
+        });
+    });
+
+    Route::group(['middleware' => ['can:staff_des']], function () {
+        Route::prefix('staff/des')->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'staff_desa']);
         });
     });
 });

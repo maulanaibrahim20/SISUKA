@@ -135,25 +135,27 @@
 
 @section('script')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Menggunakan SweetAlert untuk konfirmasi
-            $('.deleteBtn').on('click', function() {
-                var id = $(this).data('id');
+        // Menangkap klik tombol hapus
+        $('.deleteBtn').on('click', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
 
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'You won\'t be able to revert this!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Jika pengguna menekan OK, kirimkan formulir
-                        $('#deleteForm' + id).submit();
-                    }
-                });
+            // Tampilkan dialog konfirmasi
+            Swal.fire({
+                title: 'Anda yakin ingin menghapus?',
+                text: "Tindakan ini tidak dapat dibatalkan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                // Jika pengguna menekan tombol "Ya, hapus!"
+                if (result.isConfirmed) {
+                    // Kirimkan form untuk menghapus data
+                    $(this).closest('form').submit();
+                }
             });
         });
     </script>

@@ -43,11 +43,16 @@
                         <div class="valid-feedback">Looks good!</div>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="kecamatan"> Kota/Kab </label>
-                        <select name="kecamatan" class="form-control" id="kecamatan">
+                        <label for="kecamatan"> Kecamatan </label>
+                        <select name="kecamatan" class="form-control form-select select2" id="kecamatan">
                             <option value="">- Pilih -</option>
                             @foreach ($kecamatan as $item)
-                                <option value="{{ $item['id'] }}" @if ($item['id'] == $user['kecamatan']) selected @endif>
+                                @php
+                                    $isDisabled = $adminKecId->contains($item->id);
+                                @endphp
+                                <option value="{{ $item['id'] }}"
+                                    {{ $isDisabled && $item['id'] != $user['kecamatan'] ? 'disabled' : '' }}
+                                    @if ($item['id'] == $user['kecamatan']) selected @endif>
                                     {{ $item['name'] }}
                                 </option>
                             @endforeach

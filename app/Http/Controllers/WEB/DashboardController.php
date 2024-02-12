@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\WEB;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\StaffKabupaten;
+use App\Models\AdminKec\StaffKecamatan;
 use App\Models\Desa;
 use App\Models\Kecamatan;
 use App\Models\User;
 use App\Models\User\AdminDes;
 use App\Models\User\AdminKec;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -66,6 +69,14 @@ class DashboardController extends Controller
 
     public function staff_kecamatan()
     {
+        // $jabatanId = StaffKecamatan::where('user_id', Auth::id())->first();
+        // $jab = $jabatanId ? $jabatanId->jabatan->name : '';
+        // dd($jab);
+
+        // $kecamatan = StaffKecamatan::where('user_id', Auth::id())->first();
+        // $kecamatan = $kecamatan ? $kecamatan->kecamatan_id : '';
+        // $WilayahKec = Kecamatan::where('id', $kecamatan)->first();
+
         return view('staff_kec.pages.dashboard.index');
     }
 

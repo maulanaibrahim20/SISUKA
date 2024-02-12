@@ -195,12 +195,14 @@
                                             <small class="text-muted">{{ auth()->user()->roles->first()->name }}
                                                 @if (Auth::user()->hasRole('Admin Kecamatan'))
                                                     {{ $kecamatan->name }}
-                                                @elseif(Auth::user()->hasRole('Admin Desa'))
-                                                    {{ $desa->name }}
                                                 @elseif(Auth::user()->hasRole('Staff Kabupaten'))
                                                     {{ $jabatan }}
+                                                @elseif(Auth::user()->hasRole('Admin Desa'))
+                                                    {{ $desa->name }}
                                                 @elseif(Auth::user()->hasRole('Admin Kabupaten'))
                                                     Indramayu
+                                                @elseif(Auth::user()->hasRole('Staff Kecamatan'))
+                                                    {{ $staff_kecamatan->name }}
                                                 @endif
                                             </small>
                                         </div>

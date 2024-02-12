@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Admin\StaffKabupaten;
+use App\Models\AdminKec\StaffKecamatan;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\User\AdminKec;
@@ -40,6 +41,10 @@ class AppServiceProvider extends ServiceProvider
             $jabatanId = StaffKabupaten::where('user_id', Auth::id())->first();
             $jab = $jabatanId ? $jabatanId->jabatan->name : '';
 
+            $kecamatan = StaffKecamatan::where('user_id', Auth::id())->first();
+            $kecamatan = $kecamatan ? $kecamatan->kecamatan_id : '';
+            $KecamatanId = Kecamatan::where('id', $kecamatan)->first();
+
             $view->with([
                 'user' => Auth::user(),
                 'adminKec' => $adminKec,
@@ -47,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
                 'adminDes' => $adminDes,
                 'desa' => $WilayahDesa,
                 'jabatan' => $jab,
+                'staff_kecamatan' => $KecamatanId,
             ]);
         });
     }

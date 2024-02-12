@@ -8,6 +8,8 @@ use App\Http\Controllers\WEB\Admin\Permission\RoleController;
 use App\Http\Controllers\WEB\Admin\User\AdminKecController;
 use App\Http\Controllers\WEB\Admin\User\StaffKabController;
 use App\Http\Controllers\WEB\Admin\User\UserController;
+use App\Http\Controllers\WEB\AdminDes\Master\JabatanDesaController;
+use App\Http\Controllers\WEB\AdminDes\User\StaffDesController;
 use App\Http\Controllers\WEB\AdminKec\Master\JabatanKecamatanController;
 use App\Http\Controllers\WEB\AdminKec\User\AdminDesController;
 use App\Http\Controllers\WEB\Adminkec\User\StaffKecController;
@@ -129,6 +131,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => ['can:admin_des']], function () {
         Route::prefix('admin/des')->group(function () {
+            Route::prefix('create')->group(function () {
+                Route::resource('staff', StaffDesController::class);
+            });
+            Route::prefix('master')->group(function () {
+                Route::resource('jabatan', JabatanDesaController::class);
+            });
             Route::get('/dashboard', [DashboardController::class, 'admin_desa']);
         });
     });

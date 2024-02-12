@@ -153,6 +153,40 @@
                     </li>
                 @endcan
 
+                @can('admin_des')
+                    <li class="sub-category">
+                        <h3>Buat Akun</h3>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(4) == 'staff' ? 'active' : '' }}"
+                            data-bs-toggle="slide" href="{{ url('/admin/des/create/staff') }}">
+                            <i class="side-menu__icon fe fe-user"></i><span class="side-menu__label">Staff Desa</span>
+                        </a>
+                    </li>
+
+                    <li class="sub-category">
+                        <h3>Master</h3>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item {{ Request::segment(4) == 'jabatan' ? 'active' : '' }}"
+                            data-bs-toggle="slide" href="javascript:void(0);">
+                            <i class="side-menu__icon fa fa-database"></i>
+                            <span class="side-menu__label">Master</span>
+                            <i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu"
+                            style="{{ Request::segment(4) == 'jabatan' ? 'display: block;' : 'display: none;' }}">
+                            <li class="side-menu-label1"><a href="javascript:void(0)">Jabatan</a></li>
+                            <li>
+                                <a href="{{ url('/admin/des/master/jabatan') }}"
+                                    class="slide-item {{ Request::segment(4) == 'jabatan' ? 'active' : '' }}">
+                                    Jabatan
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+
                 @can('staff_kab')
                     <li class="sub-category">
                         <h3>Persuratan</h3>

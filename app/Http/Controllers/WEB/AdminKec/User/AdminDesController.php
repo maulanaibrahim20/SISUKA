@@ -110,6 +110,10 @@ class AdminDesController extends Controller
                 session()->flash('error', $th->getMessage());
             }
             return back()->withInput();
+        } catch (\Exception $er) {
+            DB::rollback();
+            Alert::error('Error', 'Gagal Menambahkan Data' . $er->getMessage());
+            return back()->with('error', 'Gagal Menambahkan Data' . $er->getMessage());
         }
     }
 

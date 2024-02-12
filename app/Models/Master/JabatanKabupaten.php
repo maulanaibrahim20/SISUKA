@@ -18,6 +18,22 @@ class JabatanKabupaten extends Model
         'name',
     ];
 
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::deleting(function ($jabatan) {
+    //         // Dapatkan semua admin kecamatan terkait
+    //         $adminKecamatans = $jabatan->staffKabupaten()->get();
+
+    //         foreach ($adminKecamatans as $adminKecamatan) {
+    //             $adminKecamatan->user()->delete();
+    //         }
+
+    //         $jabatan->staffKabupaten()->delete();
+    //     });
+    // }
+
     public function staffKabupaten()
     {
         return $this->hasMany(StaffKabupaten::class);

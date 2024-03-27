@@ -5,6 +5,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../constant/constant.dart';
 import '../../report_padi/views/create_report_view.dart';
+import '../../report_palawija/views/create_palawija_view.dart';
 import '../controllers/home_controller.dart';
 import '../models/sales.dart';
 
@@ -194,7 +195,7 @@ class HomeView extends GetView<HomeController> {
                             width: 10,
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () => Get.to(() => const CreatePalawijaView()),
                             style: ElevatedButton.styleFrom(
                                 fixedSize: Size(Get.width * 0.43, 50),
                                 elevation: 3,

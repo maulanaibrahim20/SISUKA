@@ -1,34 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_sintren/app/constant/constant.dart';
-import 'package:project_sintren/app/modules/report_padi/views/report_padi_view.dart';
-import 'package:project_sintren/app/modules/report_palawija/views/report_palawija_view.dart';
+import 'package:project_sintren/app/modules/report_padi/controllers/report_padi_controller.dart';
+import 'package:project_sintren/app/modules/report_padi/views/create_padi_view.dart';
+import 'package:project_sintren/app/modules/report_padi/views/create_pengairan_view.dart';
 
-import '../../report_padi/controllers/report_padi_controller.dart';
-import '../../report_palawija/controllers/report_palawija_controller.dart';
-import '../controllers/landing_controller.dart';
+import '../../../constant/constant.dart';
 
-class DraftsView extends StatefulWidget {
-  const DraftsView({super.key});
+class ReportLandingView extends StatefulWidget {
+  const ReportLandingView({super.key});
 
   @override
-  State<DraftsView> createState() => _DraftsViewState();
+  State<ReportLandingView> createState() => _ReportLandingViewState();
 }
 
-class _DraftsViewState extends State<DraftsView>
+class _ReportLandingViewState extends State<ReportLandingView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
-  final LandingController landingC =
-      Get.put(LandingController(), permanent: false);
-
-  final ReportPadiController padiC =
+  final ReportPadiController landingC =
       Get.put(ReportPadiController(), permanent: false);
-
-  final ReportPalawijaController palawijaC =
-      Get.put(ReportPalawijaController(), permanent: false);
-
-  final Constant cons = Constant();
+  Constant cons = Constant();
 
   @override
   void initState() {
@@ -39,24 +29,33 @@ class _DraftsViewState extends State<DraftsView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: cons.primaryColor,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: cons.secondaryColor,
+          ),
+          onPressed: () => Get.back(),
+        ),
         title: Text(
-          'Draft Laporan',
-          style: cons.style2,
+          "Tambah Data",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: cons.secondaryColor,
+          ),
         ),
         actions: [
           IconButton(
+            onPressed: () {},
             icon: Icon(
-              Icons.search,
+              Icons.send_rounded,
               color: cons.secondaryColor,
             ),
-            onPressed: () {
-              padiC.openSearch();
-              palawijaC.openSearch();
-            },
-          )
+          ),
         ],
-        backgroundColor: cons.primaryColor, // Warna latar belakang AppBar
       ),
       body: Container(
         color: Colors.white, // Warna latar belakang body
@@ -78,10 +77,7 @@ class _DraftsViewState extends State<DraftsView>
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: const [
-                  ReportPadiView(),
-                  ReportPalawijaView(),
-                ],
+                children: const [CreatePadiView(), CreatePengairanView()],
               ),
             ),
           ],

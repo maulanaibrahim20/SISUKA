@@ -1,8 +1,39 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/report_padi.dart';
 
 class ReportPadiController extends GetxController {
+  TextEditingController textC = TextEditingController();
+
+  // TabBar
+  var tabIndex = 0.obs;
+  void changeTabIndex(int index) {
+    tabIndex.value = index;
+  }
+
+  final List<Tab> tabs = [
+    const Tab(text: 'Padi'),
+    const Tab(text: 'Pengairan'),
+  ];
+
+  // Searching
+  var isSearchOpen = false.obs;
+  var searchText = ''.obs;
+  void openSearch() {
+    isSearchOpen.value = true;
+  }
+
+  void closeSearch() {
+    isSearchOpen.value = false;
+    searchText.value = '';
+    textC.clear();
+  }
+
+  void updateSearchText(String text) {
+    searchText.value = text;
+  }
+
   final List<ReportPadi> report = [
     ReportPadi(
       id: 1,
@@ -63,11 +94,11 @@ class ReportPadiController extends GetxController {
   ];
 
   var selectedDesa = ''.obs;
-  List<Desa> desa = [
-    Desa(id: "1", nama: "Kalijaga"),
-    Desa(id: "2", nama: "Argasunya"),
-    Desa(id: "3", nama: "Argapura"),
-    Desa(id: "4", nama: "Harjamukti"),
+  List<String> desa = [
+    "Kalijaga",
+    "Argasunya",
+    "Argapura",
+    "Harjamukti",
   ].obs;
 
   var selectedLahan = ''.obs;
@@ -75,11 +106,4 @@ class ReportPadiController extends GetxController {
 
   var selectedIrigasi = ''.obs;
   List<String> irigasi = ["Tidak Ada", "Ada"].obs;
-}
-
-class Desa {
-  final String id;
-  final String nama;
-
-  Desa({required this.id, required this.nama});
 }

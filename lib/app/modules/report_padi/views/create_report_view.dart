@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_sintren/app/modules/report_padi/views/create_padi_view.dart';
+import 'package:project_sintren/app/modules/report_padi/views/report_landing_view.dart';
 
 import '../../../constant/constant.dart';
+import '../components/input_dropdown_button.dart';
 import '../controllers/report_padi_controller.dart';
-import 'create_padi_view.dart';
 
 class CreateReportView extends GetView<ReportPadiController> {
   CreateReportView({super.key});
@@ -14,6 +16,7 @@ class CreateReportView extends GetView<ReportPadiController> {
   @override
   Widget build(BuildContext context) {
     final Constant cons = Constant();
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -31,6 +34,7 @@ class CreateReportView extends GetView<ReportPadiController> {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Form(
+          key: formKey,
           child: Column(
             children: [
               Card(
@@ -44,33 +48,38 @@ class CreateReportView extends GetView<ReportPadiController> {
                         "Input Data Laporan Padi",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
+                      const Divider(
+                        height: 12,
+                      ),
                       const SizedBox(height: 10),
                       InputDropdownButton(
-                        controller: controller,
                         colors: cons,
                         icon: Icons.villa,
                         label: "Pilih Desa",
+                        hint: "Pilih Desa",
                         selectedItem: controller.selectedDesa,
                         items: controller.desa.map(
                           (value) {
                             return DropdownMenuItem<String>(
-                              value: value.id,
-                              child: Text(value.nama),
+                              value: value,
+                              child: Text(value),
                             );
                           },
                         ).toList(),
                         onChange: (newValue) {
                           controller.selectedDesa.value = newValue;
                         },
+                        validator: (value) =>
+                            value == null ? "Pilih desa terlebih dahulu" : null,
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       InputDropdownButton(
-                        controller: controller,
                         colors: cons,
                         icon: Icons.villa,
                         label: "Pilih Jenis Lahan",
+                        hint: "Pilih Jenis Lahan",
                         selectedItem: controller.selectedLahan,
                         items: controller.lahan.map(
                           (value) {
@@ -83,28 +92,43 @@ class CreateReportView extends GetView<ReportPadiController> {
                         onChange: (newValue) {
                           controller.selectedLahan.value = newValue;
                         },
+                        validator: (value) => value == null
+                            ? "Pilih jenis lahan terlebih dahulu"
+                            : null,
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      InputDropdownButton(
-                        controller: controller,
-                        colors: cons,
-                        icon: Icons.villa,
-                        label: "Rehab Irigasi Tersier",
-                        selectedItem: controller.selectedIrigasi,
-                        items: controller.irigasi.map(
-                          (value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          },
-                        ).toList(),
-                        onChange: (newValue) {
-                          controller.selectedIrigasi.value = newValue;
-                        },
-                      ),
+                      Obx(() {
+                        return controller.selectedLahan.value == "Lahan Sawah"
+                            ? InputDropdownButton(
+                                colors: cons,
+                                icon: Icons.villa,
+                                label: "Rehab Irigasi Tersier",
+                                hint: "Rehab Irigasi Tersier",
+                                selectedItem: controller.selectedIrigasi,
+                                items: controller.irigasi.map(
+                                  (value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  },
+                                ).toList(),
+                                onChange: (newValue) {
+                                  controller.selectedIrigasi.value = newValue;
+                                },
+                                validator: (value) {
+                                  if (controller.selectedLahan.value ==
+                                      "Lahan Sawah") {
+                                    if (value == null) {
+                                      return "Pilih rehab irigasi tersier";
+                                    }
+                                  }
+                                },
+                              )
+                            : const SizedBox.shrink();
+                      }),
                     ],
                   ),
                 ),
@@ -129,6 +153,9 @@ class CreateReportView extends GetView<ReportPadiController> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
+                                    const Divider(
+                                      height: 12,
+                                    ),
                                     const SizedBox(height: 10),
                                     TextFormField(
                                       keyboardType: TextInputType.number,
@@ -142,9 +169,13 @@ class CreateReportView extends GetView<ReportPadiController> {
                                         ),
                                       ),
                                       validator: (value) {
-                                        return value == null || value.isEmpty
-                                            ? "username/email tidak boleh kosong"
-                                            : null;
+                                        if (controller.selectedIrigasi.value ==
+                                            "Ada") {
+                                          return value == null || value.isEmpty
+                                              ? "Tanam tidak boleh kosong"
+                                              : null;
+                                        }
+                                        return null;
                                       },
                                     ),
                                     const SizedBox(height: 10),
@@ -160,9 +191,13 @@ class CreateReportView extends GetView<ReportPadiController> {
                                         ),
                                       ),
                                       validator: (value) {
-                                        return value == null || value.isEmpty
-                                            ? "username/email tidak boleh kosong"
-                                            : null;
+                                        if (controller.selectedIrigasi.value ==
+                                            "Ada") {
+                                          return value == null || value.isEmpty
+                                              ? "Panen tidak boleh kosong"
+                                              : null;
+                                        }
+                                        return null;
                                       },
                                     ),
                                   ],
@@ -178,7 +213,13 @@ class CreateReportView extends GetView<ReportPadiController> {
                 },
               ),
               ElevatedButton(
-                onPressed: () => Get.to(() => const CreatePadiView()),
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    controller.selectedLahan.value == "Lahan Sawah"
+                        ? Get.to(() => const ReportLandingView())
+                        : Get.to(() => const CreatePadiView());
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   elevation: 5,
                   backgroundColor: cons.primaryColor,
@@ -197,47 +238,5 @@ class CreateReportView extends GetView<ReportPadiController> {
         ),
       ),
     );
-  }
-}
-
-class InputDropdownButton extends StatelessWidget {
-  const InputDropdownButton({
-    super.key,
-    required this.controller,
-    required this.colors,
-    required this.icon,
-    required this.label,
-    required this.selectedItem,
-    required this.items,
-    this.onChange,
-  });
-
-  final ReportPadiController controller;
-  final Constant colors;
-  final IconData icon;
-  final String label;
-  final RxString selectedItem;
-  final List<DropdownMenuItem<String>> items;
-  final dynamic onChange;
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(() {
-      return DropdownButtonFormField<String>(
-        value: selectedItem.value == "" ? null : selectedItem.value,
-        items: items,
-        onChanged: onChange,
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            icon,
-            color: colors.primaryColor,
-          ),
-          labelText: label,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      );
-    });
   }
 }

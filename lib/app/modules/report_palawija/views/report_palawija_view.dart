@@ -11,72 +11,117 @@ class ReportPalawijaView extends GetView<ReportPalawijaController> {
 
   @override
   Widget build(BuildContext context) {
-    final Constant cons = Constant();
+    Constant cons = Constant();
 
-    final ReportPalawijaController reportC =
-        Get.put(ReportPalawijaController(), permanent: false);
+    return Obx(() {
+      final filteredPalawijaReports = controller.report.where((report) {
+        final searchText = controller.searchText.value.toLowerCase();
+        final tanggalLaporan = report.date.toLowerCase();
+        final wilayah = report.desa.toLowerCase();
+        return tanggalLaporan.contains(searchText) ||
+            wilayah.contains(searchText);
+      }).toList();
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: reportC.sales.map((sale) {
-              return Card(
-                elevation: 4.0,
-                margin: const EdgeInsets.all(8.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: cons.primaryColor
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            tabStatus.toString(),
-                            style: TextStyle(color: cons.secondaryColor),
-                          ),
-                          subtitle: Text(
-                            '\$${sale.price.toStringAsFixed(2)}',
-                            style: TextStyle(color: cons.secondaryColor),
-                          ),
-                          onTap: () {
-                            // Action when tapped
-                          },
-                        ),
+      return Column(
+        children: [
+          controller.isSearchOpen.value
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: controller.textC,
+                    onChanged: controller.updateSearchText,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: 'Cari laporan palawija ...',
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: cons.primaryColor,
                       ),
-                      if (tabStatus == 1)
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.edit_document,
-                            size: 25,
-                            color: cons.secondaryColor,
-                          ),
+                      suffixIcon: IconButton(
+                        icon: const Icon(
+                          Icons.clear,
+                          color: Colors.red,
                         ),
-                      if (tabStatus == 1)
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.delete,
-                            size: 25,
-                            color: cons.secondaryColor,
-                          ),
-                        ),
-                      const SizedBox(width: 10),
-                    ],
+                        onPressed: () {
+                          controller.closeSearch();
+                        },
+                      ),
+                    ),
                   ),
-                ),
-              );
-            }).toList(),
+                )
+              : const SizedBox.shrink(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredPalawijaReports.length,
+              itemBuilder: (context, index) {
+                final report = filteredPalawijaReports[index];
+                return Card(
+                  elevation: 4.0,
+                  margin: const EdgeInsets.all(8.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: cons.primaryColor,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.notes,
+                              color: cons.secondaryColor,
+                            ),
+                            title: Text("Laporan: ${report.date}",
+                                style: cons.style2),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Desa: ${report.desa}",
+                                  style: TextStyle(color: cons.secondaryColor),
+                                ),
+                                Text(
+                                  report.jenisLahan,
+                                  style: TextStyle(color: cons.secondaryColor),
+                                ),
+                              ],
+                            ),
+                            onTap: () {
+                              // Action when tapped
+                            },
+                          ),
+                        ),
+                        if (tabStatus == 1) ...[
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.edit_document,
+                              size: 25,
+                              color: cons.secondaryColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.delete,
+                              size: 25,
+                              color: cons.secondaryColor,
+                            ),
+                          ),
+                        ],
+                        const SizedBox(width: 10),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-      ),
-    );
+        ],
+      );
+    });
   }
 }

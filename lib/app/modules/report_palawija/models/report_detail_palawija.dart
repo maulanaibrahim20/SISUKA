@@ -1,21 +1,27 @@
-class ReportDetailPadi {
+class ReportDetailPalawija {
   int id;
-  String jenisPadi;
+  String jenisPalawija;
   bool bantuan;
   int tanamanAkhirBulanLalu;
   int tanamanAkhirBulanIni;
   int tanam;
   int panen;
+  int panenMuda;
+  int panenTernak;
   int puso;
+  int produksi;
 
-  ReportDetailPadi(
+  ReportDetailPalawija(
     this.id,
-    this.jenisPadi,
+    this.jenisPalawija,
     this.bantuan,
     this.tanamanAkhirBulanLalu,
     this.tanamanAkhirBulanIni,
     this.tanam,
     this.panen,
+    this.panenMuda,
+    this.panenTernak,
     this.puso,
+    this.produksi,
   );
 }

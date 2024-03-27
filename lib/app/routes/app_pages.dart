@@ -1,9 +1,9 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:get/get.dart';
 
 import 'package:project_sintren/app/modules/account/bindings/account_binding.dart';
 import 'package:project_sintren/app/modules/account/views/account_view.dart';
+import 'package:project_sintren/app/modules/coba/bindings/coba_binding.dart';
+import 'package:project_sintren/app/modules/coba/views/coba_view.dart';
 import 'package:project_sintren/app/modules/home/bindings/home_binding.dart';
 import 'package:project_sintren/app/modules/home/views/home_view.dart';
 import 'package:project_sintren/app/modules/landing/bindings/landing_binding.dart';
@@ -14,6 +14,8 @@ import 'package:project_sintren/app/modules/report_padi/bindings/report_padi_bin
 import 'package:project_sintren/app/modules/report_padi/views/report_padi_view.dart';
 import 'package:project_sintren/app/modules/report_palawija/bindings/report_palawija_binding.dart';
 import 'package:project_sintren/app/modules/report_palawija/views/report_palawija_view.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -52,6 +54,11 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.COBA,
+      page: () => const CobaView(),
+      binding: CobaBinding(),
     ),
   ];
 }

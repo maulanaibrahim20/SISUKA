@@ -12,6 +12,7 @@ abstract class Routes {
   static const REPORT_PALAWIJA = _Paths.REPORT_PALAWIJA;
   static const ACCOUNT = _Paths.ACCOUNT;
   static const LOGIN = _Paths.LOGIN;
+  static const COBA = _Paths.COBA;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const REPORT_PALAWIJA = '/report-palawija';
   static const ACCOUNT = '/account';
   static const LOGIN = '/login';
+  static const COBA = '/coba';
 }

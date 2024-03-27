@@ -4,51 +4,23 @@ import 'package:get/get.dart';
 import '../../../constant/constant.dart';
 import '../components/input_dropdown_button.dart';
 import '../components/input_text_field.dart';
-import '../controllers/padi_controller.dart';
-import '../controllers/report_padi_controller.dart';
-import '../models/report_detail_padi.dart';
+import '../controllers/pengairan_controller.dart';
+import '../models/report_detail_pengairan.dart';
 
-class CreatePadiView extends GetView<PadiController> {
-  const CreatePadiView({super.key});
+class CreatePengairanView extends GetView<PengairanController> {
+  const CreatePengairanView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final PadiController controller =
-        Get.put(PadiController(), permanent: false);
-    final ReportPadiController reportC =
-        Get.put(ReportPadiController(), permanent: false);
+    final PengairanController controller =
+        Get.put(PengairanController(), permanent: false);
+
     Constant cons = Constant();
-    return Obx(() {
-      return Scaffold(
-        appBar: reportC.selectedLahan.value == "Lahan Non-Sawah"
-            ? AppBar(
-                title: Text(
-                  "Tambah Data Padi",
-                  style: cons.style2,
-                ),
-                automaticallyImplyLeading: false,
-                leading: IconButton(
-                  onPressed: () => Get.back(),
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: cons.secondaryColor,
-                  ),
-                ),
-                backgroundColor: cons.primaryColor,
-                actions: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.send_rounded,
-                      color: cons.secondaryColor,
-                    ),
-                  ),
-                ],
-              )
-            : null,
-        backgroundColor: Colors.grey[300],
-        resizeToAvoidBottomInset: false,
-        body: Padding(
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
+      resizeToAvoidBottomInset: false,
+      body: Obx(() {
+        return Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
@@ -207,9 +179,10 @@ class CreatePadiView extends GetView<PadiController> {
                   height: Get.height * 0.5,
                   width: Get.width,
                   child: ListView.builder(
-                    itemCount: controller.detailPadi.length,
+                    itemCount: controller.detailPengairan.length,
                     itemBuilder: (context, index) {
-                      ReportDetailPadi data = controller.detailPadi[index];
+                      ReportDetailPengairan data =
+                          controller.detailPengairan[index];
                       return Card(
                         surfaceTintColor: cons.secondaryColor,
                         elevation: 3,
@@ -226,9 +199,9 @@ class CreatePadiView extends GetView<PadiController> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Jenis Padi: ${data.jenisPadi}',
+                                    'Jenis Pengairan: ${data.jenisPengairan}',
                                     style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   const Icon(
@@ -245,9 +218,6 @@ class CreatePadiView extends GetView<PadiController> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Status: ${data.bantuan ? "Bantuan Pemerintah" : "Bantuan Non-Pemerintah"}',
-                                  ),
                                   Text(
                                     'Tanaman Akhir Bulan Lalu: ${data.tanamanAkhirBulanLalu}',
                                     style: const TextStyle(fontSize: 14),
@@ -288,14 +258,14 @@ class CreatePadiView extends GetView<PadiController> {
               ),
             ],
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 }
 
 void _showPopup(
-    BuildContext context, PadiController controller, Constant cons) {
+    BuildContext context, PengairanController controller, Constant cons) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -311,17 +281,17 @@ void _showPopup(
             ],
           ),
           content: SizedBox(
-            height: 640,
+            height: 555,
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   InputDropdownButton(
                     colors: cons,
                     icon: Icons.villa,
-                    label: "Pilih Jenis Padi",
-                    hint: "Pilih Jenis Padi",
-                    selectedItem: controller.selectedJenisPadi,
-                    items: controller.jenisPadi.map(
+                    label: "Pilih Jenis Pengairan",
+                    hint: "Pilih Jenis Pengairan",
+                    selectedItem: controller.selectedJenisPengairan,
+                    items: controller.jenisPengairan.map(
                       (value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -330,34 +300,11 @@ void _showPopup(
                       },
                     ).toList(),
                     onChange: (newValue) {
-                      controller.selectedJenisPadi.value = newValue;
+                      controller.selectedJenisPengairan.value = newValue;
                     },
                     validator: (value) => value == null
-                        ? "Pilih jenis padi terlebih dahulu"
+                        ? "Pilih jenis pengairan terlebih dahulu"
                         : null,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  InputDropdownButton(
-                    colors: cons,
-                    icon: Icons.villa,
-                    label: "Bantuan Pemerintah",
-                    hint: "Bantuan Pemerintah",
-                    selectedItem: controller.selectedBantuan,
-                    items: controller.bantuan.map(
-                      (value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      },
-                    ).toList(),
-                    onChange: (newValue) {
-                      controller.selectedBantuan.value = newValue;
-                    },
-                    validator: (value) =>
-                        value == null ? "Pilih bantuan terlebih dahulu" : null,
                   ),
                   const SizedBox(
                     height: 10,
@@ -430,7 +377,7 @@ void _showPopup(
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        controller.addDetailPadi();
+                        controller.addDetailPengairan();
                         controller.countTotal();
                         Navigator.of(context).pop();
                       }

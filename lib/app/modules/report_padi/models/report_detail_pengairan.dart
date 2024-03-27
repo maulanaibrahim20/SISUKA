@@ -1,19 +1,19 @@
 class ReportDetailPengairan {
-  late String jenisPengairan;
-  late bool bantuan;
-  late int akhirBulanLalu;
-  late int akhirBulanIni;
-  late int tanam;
-  late int panen;
-  late int puso;
+  int id;
+  String jenisPengairan;
+  int tanamanAkhirBulanLalu;
+  int tanamanAkhirBulanIni;
+  int tanam;
+  int panen;
+  int puso;
 
-  ReportDetailPengairan({
-    required this.jenisPengairan,
-    required this.bantuan,
-    required this.akhirBulanLalu,
-    required this.akhirBulanIni,
-    required this.tanam,
-    required this.panen,
-    required this.puso,
-  });
+  ReportDetailPengairan(
+    this.id,
+    this.jenisPengairan,
+    this.tanamanAkhirBulanLalu,
+    this.tanamanAkhirBulanIni,
+    this.tanam,
+    this.panen,
+    this.puso,
+  );
 }

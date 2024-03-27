@@ -4,6 +4,7 @@ import 'package:project_sintren/app/constant/constant.dart';
 import 'package:project_sintren/app/modules/report_padi/views/report_padi_view.dart';
 import 'package:project_sintren/app/modules/report_palawija/views/report_palawija_view.dart';
 
+import '../../report_padi/controllers/report_padi_controller.dart';
 import '../controllers/landing_controller.dart';
 
 class ReportsView extends StatefulWidget {
@@ -18,6 +19,8 @@ class _ReportsViewState extends State<ReportsView>
   late TabController _tabController;
   final LandingController landingC =
       Get.put(LandingController(), permanent: false);
+  final ReportPadiController padiC =
+      Get.put(ReportPadiController(), permanent: false);
   final Constant cons = Constant();
 
   @override
@@ -34,6 +37,17 @@ class _ReportsViewState extends State<ReportsView>
           'Laporan Terkirim',
           style: cons.style2,
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: cons.secondaryColor,
+            ),
+            onPressed: () {
+              padiC.openSearch();
+            },
+          )
+        ],
         backgroundColor: cons.primaryColor, // Warna latar belakang AppBar
       ),
       body: Container(
